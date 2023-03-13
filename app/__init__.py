@@ -20,7 +20,6 @@ def create_app():
     return app
 
 
-
 def register_extensions(app):
     db.init_app(app)
     mail.init_app(app)

@@ -28,8 +28,6 @@ def number_validator(data):
 
 
 
-
-
 def user_exist_check(parser,User):
         if bool(User.query.filter_by(email = parser["email"]).first()):
             return "This mail is already redgistered", 400
@@ -39,6 +37,10 @@ def user_exist_check(parser,User):
 
         if bool(User.query.filter_by(personal_id = parser["personal_id"]).first()):
             return "This personal_id is already redgistered", 400
+
+
+
+
 
 
 def check_validators(parser, User, user_check = True):

@@ -10,6 +10,7 @@ class Country(BaseModel):
 
     user = db.relationship("User", backref = "country")
 
+
 class Region(BaseModel):
     __tablename__ = "regions"
 
@@ -17,6 +18,7 @@ class Region(BaseModel):
     region_name = db.Column(db.String)
 
     user = db.relationship("User", backref = "region")
+
 
 class City(BaseModel):
     __tablename__ = "cities"
@@ -26,6 +28,7 @@ class City(BaseModel):
 
     user = db.relationship("User", backref = "city")
 
+
 class University(BaseModel):
     __tablename__ = "universities"
 
@@ -33,6 +36,7 @@ class University(BaseModel):
     university_name = db.Column(db.String)
 
     user = db.relationship("User", backref = "university")
+
 
 class User(BaseModel):
 

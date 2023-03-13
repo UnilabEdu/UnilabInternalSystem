@@ -45,7 +45,7 @@ class RegistrationApi(Resource):
     
 
 
-    def get(self):
+    def post(self):
         
         parser = self.parser.parse_args()
         validation = check_validators(parser, User)
