@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "226dc0dc-5a73-459b-a5c4-c8602c92d231",
+		"_postman_id": "e169c0ea-5b7f-4e95-b8b5-a527cfe43ff2",
 		"name": "UnilabInternalSystem",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30556071"
+		"_exporter_id": "29680835"
 	},
 	"item": [
 		{
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"giorgi@gmail.com\",\r\n    \"password\": \"mereba\"\r\n}",
+							"raw": "{\r\n    \"email\": \"giorgi.komasuridze@gmail.com\",\r\n    \"password\": \"komasuridze\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -852,6 +852,79 @@
 							"path": [
 								"api",
 								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subjects",
+			"item": [
+				{
+					"name": "Create Subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzU4NjE0NSwianRpIjoiOGNjYWM4YmEtNWIxNy00ZTlmLWE5NWQtYWU4MzIyZTQ3ZTBjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imdpb3JnaS5rb21hc3VyaWR6ZUBnbWFpbC5jb20iLCJuYmYiOjE3MDc1ODYxNDUsImV4cCI6MTcwNzU4OTc0NX0.Lq2nFY4RxSAMqEIryLxXLZnWuR1jeyGTruqV98UJ3Ck",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Python",
+									"type": "text"
+								},
+								{
+									"key": "lecturers_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "lecturers_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "course_syllabus",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "internship_syllabus",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "tlt_syllabus",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "school_syllabus",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/subject",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subject"
 							]
 						}
 					},
