@@ -2,8 +2,10 @@ from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, current_user
 from flask import request
 from uuid import uuid4
+from os import path
 
 from app.models import Subject, SubjectLecturer
+from app import Config
 
 SYLLABUS_NAMES = ["course_syllabus", "internship_syllabus", "tlt_syllabus", "school_syllabus"]
 
@@ -42,7 +44,7 @@ class SubjectApi(Resource):
 
         for index, syllabus in enumerate(syllabus_names):
             if syllabus is not None:
-                syllabus_list[index].save(f"files/{syllabus}.pdf")
+                syllabus_list[index].save(path.join(Config.BASE_DIR, "app", "files", f"{syllabus}.pdf"))
 
         new_subject = Subject(
             name=request_parser["name"],
