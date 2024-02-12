@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e169c0ea-5b7f-4e95-b8b5-a527cfe43ff2",
+		"_postman_id": "226dc0dc-5a73-459b-a5c4-c8602c92d231",
 		"name": "UnilabInternalSystem",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29680835"
+		"_exporter_id": "30556071"
 	},
 	"item": [
 		{
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"giorgi.komasuridze@gmail.com\",\r\n    \"password\": \"komasuridze\"\r\n}",
+							"raw": "{\r\n    \"email\": \"sergo.sergo@gmail.com\",\r\n    \"password\": \"sergishvili\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -852,6 +852,62 @@
 							"path": [
 								"api",
 								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Project",
+			"item": [
+				{
+					"name": "Upload Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzQ5MjIyOCwianRpIjoiYWY5OGRkNmEtZDNlZi00MzMzLTk4MzktZmEwNDY4NzljOGJlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzQ5MjIyOCwiZXhwIjoxNzA3NDk1ODI4fQ.el-bpwtfTE7f9QKK_TpsU0t3B7j9iJ8gtjsLoosbw20",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "My Python project",
+									"contentType": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "this is my Python project",
+									"contentType": "",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"contentType": "",
+									"type": "file",
+									"src": "postman-cloud:///1eec72f6-88fd-40f0-90c8-aa05b30a24f9"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/project",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"project"
 							]
 						}
 					},
