@@ -23,28 +23,37 @@ class SubjectApi(Resource):
     @jwt_required()
     def post(self):
         request_parser = self.parser.parse_args()
-        syllabus_list = [request.files[name] for name in SYLLABUS_NAMES]
+        syllabus_list = [
+            request_parser["course_syllabus"],
+            request_parser["internship_syllabus"],
+            request_parser["tlt_syllabus"],
+            request_parser["school_syllabus"],
+        ]
+
+        print(syllabus_list)
 
         if not current_user.check_permission("can_create_subject"):
             return "You can't create Subjects", 403
 
-        # syllabus_names = [str(uuid4()) if syllabus.filename != "" else None for syllabus in syllabus_list]
-        syllabus_names = []
-        for syllabus in syllabus_list:
-            match syllabus.filename:
-                case name if name.endswith(".pdf") or name.endswith(".PDF"):
-                    syllabus_names.append(str(uuid4()))
-                case "":
-                    syllabus_names.append(None)
-                case _:
-                    return "Only PDF format is allowed for syllabus", 400
-
         if not any(syllabus_list):
             return "At least one syllabus must be sent", 400
 
-        for index, syllabus in enumerate(syllabus_names):
-            if syllabus is not None:
-                syllabus_list[index].save(path.join(Config.BASE_DIR, "app", "files", f"{syllabus}.pdf"))
+        syllabus_names = []
+        for syllabus in SYLLABUS_NAMES:
+            file = request.files[syllabus]
+
+            if file.filename == "":
+                syllabus_names.append(None)
+                continue
+
+            if file.filename.lower().endswith(".pdf"):
+                name = str(uuid4())
+                file.save(path.join(Config.BASE_DIR, "app", "files", f"{name}.pdf"))
+                syllabus_names.append(name)
+            else:
+                return "Only PDF format is allowed!", 400
+
+        print(syllabus_names)
 
         new_subject = Subject(
             name=request_parser["name"],
