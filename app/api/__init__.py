@@ -9,6 +9,7 @@ from app.api.questions import QuestionApi, FormApi, UserAnswerApi, QuestionFormA
 from app.api.certificate import CertificateApi
 from app.api.subjects import SubjectApi
 from app.api.projects import ProjectApi
+from app.api.portfolio import PortfolioApi
 
 
 api = Api()
@@ -29,3 +30,4 @@ api.add_resource(UserAnswerApi, "/api/user_answer")
 api.add_resource(CertificateApi, "/api/certificate")
 api.add_resource(ProjectApi, "/api/project")
 api.add_resource(SubjectApi, "/api/subject")
+api.add_resource(PortfolioApi, "/api/portfolio", "/api/portfolio/<string:uuid>")

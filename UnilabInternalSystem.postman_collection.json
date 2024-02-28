@@ -870,7 +870,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzQ5MjIyOCwianRpIjoiYWY5OGRkNmEtZDNlZi00MzMzLTk4MzktZmEwNDY4NzljOGJlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzQ5MjIyOCwiZXhwIjoxNzA3NDk1ODI4fQ.el-bpwtfTE7f9QKK_TpsU0t3B7j9iJ8gtjsLoosbw20",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzkxNDk0NywianRpIjoiOWFkOWQwNGUtOGY5OC00ZjI1LTk1MzItNmIwYzA5ZWUyZGY4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzkxNDk0NywiZXhwIjoxNzA3OTE4NTQ3fQ.uV_GW7xFtVNSRYiD7K3kIWOsol8i_WR_sxGXCPeMLjA",
 									"type": "string"
 								}
 							]
@@ -897,6 +897,16 @@
 									"contentType": "",
 									"type": "file",
 									"src": "postman-cloud:///1eec72f6-88fd-40f0-90c8-aa05b30a24f9"
+								},
+								{
+									"key": "type",
+									"value": "personal",
+									"type": "text"
+								},
+								{
+									"key": "user_role",
+									"value": "Python Developer",
+									"type": "text"
 								}
 							]
 						},
@@ -908,6 +918,77 @@
 							"path": [
 								"api",
 								"project"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Portfolio",
+			"item": [
+				{
+					"name": "Get Portfolio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzkxODU4OCwianRpIjoiNzdiZDk2MjItYjZkYy00Zjg3LTllYTktZjE3MDNjYzA2N2Q4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzkxODU4OCwiZXhwIjoxNzA3OTIyMTg4fQ.XfFDPJkyjtDFp7fSVyvUzGb3-v72oEYJtg8-CgIU4dk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/portfolio/{{UUID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"portfolio",
+								"{{UUID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Portfolio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzkxNDk0NywianRpIjoiOWFkOWQwNGUtOGY5OC00ZjI1LTk1MzItNmIwYzA5ZWUyZGY4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzkxNDk0NywiZXhwIjoxNzA3OTE4NTQ3fQ.uV_GW7xFtVNSRYiD7K3kIWOsol8i_WR_sxGXCPeMLjA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_uuid\": \"cdb4e8b5-fd65-4d50-80e3-3a485c26b214\",\r\n    \"email\": \"sergo.sergo@gmail.com\",\r\n    \"fullname\": \"full name\",\r\n    \"role\": \"Python Developer\",\r\n    \"about_me\": \"This is information about me\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/portfolio",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"portfolio"
 							]
 						}
 					},

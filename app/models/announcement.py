@@ -35,7 +35,18 @@ class Announcement(BaseModel):
                 "start_date": str(announcement.start_date),
                 "end_date": str(announcement.end_date),
                 "description": announcement.description,
-                "lecturer_ids": [lecturer.id for lecturer in announcement.lecturers]
+                "lecturer_ids": [lecturer.id for lecturer in announcement.lecturers],
+                "projects": [
+                    {
+                        "id": project.id,
+                        "name": project.name,
+                        "description": project.description,
+                        "url": project.url,
+                        "date": str(project.date),
+                        "type": project.type
+                    }
+                    for project in announcement.projects
+                ]
             }
             for announcement in announcements
         ]

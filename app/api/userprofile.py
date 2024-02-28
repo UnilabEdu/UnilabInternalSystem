@@ -34,6 +34,8 @@ class UserProfileApi(Resource):
     parser.add_argument("semester", required=True, type=str)
     parser.add_argument("degree_level", required=True, type=str)
 
+    parser.add_argument("about_me", required=True, type=str)
+
     parser.add_argument("terms", required=False, type=str, default=True)
 
     @jwt_required()
@@ -77,6 +79,7 @@ class UserProfileApi(Resource):
             current_user.program = parser["program"]
             current_user.semester = parser["semester"]
             current_user.degree_level = parser["degree_level"]
+            current_user.about_me = parser["about_me"]
 
             current_user.save()
 
