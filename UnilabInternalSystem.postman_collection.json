@@ -90,6 +90,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Locations & Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTIyNTM3MSwianRpIjoiNmM0NjE5YTMtNzQ3ZS00NzIyLWFkOGEtM2Q5YmVlZjQ5MDk0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwOTIyNTM3MSwiZXhwIjoxNzA5MjI4OTcxfQ.WMlSpw3mj6bABLlg2bwcU_pLrJ1U4zZhupaTdono9R4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/registration",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"registration"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -132,7 +160,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNjgyMTY0MiwianRpIjoiNzYxNjA3MjUtYjliNS00N2FjLWFmMjktOTQ3OWUwOTI3YTY1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNjgyMTY0MiwiZXhwIjoxNzA2ODI1MjQyfQ.C5ob07-8slQZTfr6n4jguZlFl7l4NgN6wXXsdoCdmKI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODc3NjI0MCwianRpIjoiNzA1MmNhYjgtNmQ0Zi00M2QyLTg1MjYtY2FjOGQwN2JkODk3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwODc3NjI0MCwiZXhwIjoxNzA4Nzc5ODQwfQ.VW6S5FuMImcZ5WR8abD6nM7N1Cd5wfcLG7DlpsFD3T4",
 									"type": "string"
 								}
 							]
@@ -141,7 +169,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Python Course 2024\",\r\n    \"subject_id\": 1,\r\n    \"activity_type_id\": 2,\r\n    \"lecturer_ids\": [\r\n        {\"id\": 1},\r\n        {\"id\": 3}\r\n    ],\r\n    \"registration_start\": \"2013-02-02T24\",\r\n    \"registration_end\": \"2014-03-02T24\",\r\n    \"description\": \"This is a Python Course\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Python\",\r\n    \"subject_id\": 1,\r\n    \"activity_type_id\": 2,\r\n    \"lecturer_ids\": [\r\n        {\"id\": 1},\r\n        {\"id\": 3}\r\n    ],\r\n    \"start_date\": \"2023-03-02T24\",\r\n    \"end_date\": \"2025-03-02T24\",\r\n    \"description\": \"This is a Python Course\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -758,7 +786,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNjM1NzMxNywianRpIjoiYzY4YjllYjktZjNkMi00YzU4LWFmYzktMWU0Yjg5Yjg0Mzg4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imdpb3JnaTI2MzdAZ21haWwuY29tIiwibmJmIjoxNzA2MzU3MzE3LCJleHAiOjE3MDYzNjA5MTd9.VKwv2_2Q3sfDlGey5a6GrEc-QhWTupRRbjX23nBTCXk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzkyNTE1MSwianRpIjoiZTYzMWE3YzMtNWI5OC00Y2Y0LWJjY2QtM2ZhZDExMjg1OGRjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzkyNTE1MSwiZXhwIjoxNzA3OTI4NzUxfQ.Qv6234Tmd0_EpFyyKb-Yb6zcz6K28l_OBrKkI8VfTww",
 									"type": "string"
 								}
 							]
@@ -767,7 +795,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 10,\r\n    \"name\": \"giorgi\",\r\n    \"lastname\": \"merebashvili\",\r\n    \"email\": \"giorgi@gmail.com\",\r\n    \"password\": \"mereba\",\r\n    \"password_new\": \"merebagio\",\r\n    \"number\": \"555555555\",\r\n    \"personal_id\": \"01010401123\",\r\n    \"date\": \"2013-02-02T24\",\r\n    \"gender\": \"Male\",\r\n    \"country_id\": 1,\r\n    \"region_id\": 1,\r\n    \"city_id\": 1,\r\n    \"address\": \"დიდი დიღომი პეტრიწის 16ა\",\r\n    \"role\": [\r\n        \"ლექტორი\"\r\n    ],\r\n    \"school\": \"null\",\r\n    \"grade\": \"null\",\r\n    \"parent_name\": \"null\",\r\n    \"parent_lastname\": \"null\",\r\n    \"parent_number\": \"null\",\r\n    \"university_id\": 1,\r\n    \"faculty\": \"ზუსტ და საბუნებისმეტყველო მეცნიერებათა ფაკულტეტი\",\r\n    \"program\": \"მათემატიკა\",\r\n    \"semester\": \"6\",\r\n    \"degree_level\": \"ბაკალავრი\"\r\n}",
+							"raw": "{\r\n    \"id\": 9,\r\n    \"name\": \"giorgi\",\r\n    \"lastname\": \"merebashvili\",\r\n    \"email\": \"giorgi@gmail.com\",\r\n    \"password\": \"mereba\",\r\n    \"password_new\": \"merebagio\",\r\n    \"number\": \"555555555\",\r\n    \"personal_id\": \"01010401123\",\r\n    \"date\": \"2013-02-02T24\",\r\n    \"gender\": \"Male\",\r\n    \"country_id\": 1,\r\n    \"region_id\": 1,\r\n    \"city_id\": 1,\r\n    \"address\": \"დიდი დიღომი პეტრიწის 16ა\",\r\n    \"role\": [\r\n        \"ლექტორი\"\r\n    ],\r\n    \"school\": \"null\",\r\n    \"grade\": \"null\",\r\n    \"parent_name\": \"null\",\r\n    \"parent_lastname\": \"null\",\r\n    \"parent_number\": \"null\",\r\n    \"university_id\": 1,\r\n    \"faculty\": \"ზუსტ და საბუნებისმეტყველო მეცნიერებათა ფაკულტეტი\",\r\n    \"program\": \"მათემატიკა\",\r\n    \"semester\": \"6\",\r\n    \"degree_level\": \"ბაკალავრი\",\r\n    \"about_me\": \"this is about me\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -870,7 +898,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzkxNDk0NywianRpIjoiOWFkOWQwNGUtOGY5OC00ZjI1LTk1MzItNmIwYzA5ZWUyZGY4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzkxNDk0NywiZXhwIjoxNzA3OTE4NTQ3fQ.uV_GW7xFtVNSRYiD7K3kIWOsol8i_WR_sxGXCPeMLjA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODc3NjI0MCwianRpIjoiNzA1MmNhYjgtNmQ0Zi00M2QyLTg1MjYtY2FjOGQwN2JkODk3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwODc3NjI0MCwiZXhwIjoxNzA4Nzc5ODQwfQ.VW6S5FuMImcZ5WR8abD6nM7N1Cd5wfcLG7DlpsFD3T4",
 									"type": "string"
 								}
 							]
@@ -936,7 +964,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzkxODU4OCwianRpIjoiNzdiZDk2MjItYjZkYy00Zjg3LTllYTktZjE3MDNjYzA2N2Q4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzkxODU4OCwiZXhwIjoxNzA3OTIyMTg4fQ.XfFDPJkyjtDFp7fSVyvUzGb3-v72oEYJtg8-CgIU4dk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwODM1NjI2NSwianRpIjoiZDc3YTdjZDAtYmVkNS00ZGI4LTllZGItOThlZmI4MDdkNGViIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwODM1NjI2NSwiZXhwIjoxNzA4MzU5ODY1fQ.6adFuaw0IIL04ygCHeTmHmchhJpRRUcD3AYtoe3CE_M",
 									"type": "string"
 								}
 							]
@@ -952,43 +980,6 @@
 								"api",
 								"portfolio",
 								"{{UUID}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Portfolio",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzkxNDk0NywianRpIjoiOWFkOWQwNGUtOGY5OC00ZjI1LTk1MzItNmIwYzA5ZWUyZGY4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InNlcmdvLnNlcmdvQGdtYWlsLmNvbSIsIm5iZiI6MTcwNzkxNDk0NywiZXhwIjoxNzA3OTE4NTQ3fQ.uV_GW7xFtVNSRYiD7K3kIWOsol8i_WR_sxGXCPeMLjA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"user_uuid\": \"cdb4e8b5-fd65-4d50-80e3-3a485c26b214\",\r\n    \"email\": \"sergo.sergo@gmail.com\",\r\n    \"fullname\": \"full name\",\r\n    \"role\": \"Python Developer\",\r\n    \"about_me\": \"This is information about me\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{URL}}/api/portfolio",
-							"host": [
-								"{{URL}}"
-							],
-							"path": [
-								"api",
-								"portfolio"
 							]
 						}
 					},

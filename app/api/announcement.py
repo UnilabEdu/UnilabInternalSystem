@@ -11,8 +11,10 @@ class AnnouncementApi(Resource):
     parser.add_argument("subject_id", required=True, type=int)
     parser.add_argument("activity_type_id", required=True, type=int)
     parser.add_argument("lecturer_ids", required=True, action="append", type=dict)
-    parser.add_argument("registration_start", required=True, type=inputs.datetime_from_iso8601)
-    parser.add_argument("registration_end", required=True, type=inputs.datetime_from_iso8601)
+    # parser.add_argument("registration_start", required=True, type=inputs.datetime_from_iso8601)
+    # parser.add_argument("registration_end", required=True, type=inputs.datetime_from_iso8601)
+    parser.add_argument("start_date", required=True, type=inputs.datetime_from_iso8601)
+    parser.add_argument("end_date", required=True, type=inputs.datetime_from_iso8601)
     parser.add_argument("description", required=False, type=str)
 
     @jwt_required()
@@ -35,8 +37,10 @@ class AnnouncementApi(Resource):
             name=request_parser["name"],
             subject_id=request_parser["subject_id"],
             activity_type_id=request_parser["activity_type_id"],
-            registration_start=request_parser["registration_start"],
-            registration_end=request_parser["registration_end"],
+            # registration_start=request_parser["registration_start"],
+            # registration_end=request_parser["registration_end"],
+            start_date=request_parser["start_date"],
+            end_date=request_parser["end_date"],
             description=request_parser["description"]
         )
         new_announcement.create()

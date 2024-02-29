@@ -24,31 +24,56 @@ def populate_db():
     click.echo("Creating Initial Entries...")
 
     # populating country table
-    countries = ["საქართველო", "საფრანგეთი",
-                 "გერმანია", "ავსტრია", "დიდი ბრიტანეთი"]
+    countries = [
+        "საქართველო", "საფრანგეთი",
+        "გერმანია", "ავსტრია", "დიდი ბრიტანეთი"
+    ]
     for country in countries:
         country_ = Country(country_name=country)
         country_.create()
     country_.save()
 
     # populating region table
-    regions = ["იმერეთი", "სვანეთი", "გურია", "რაჭა", "კახეთი"]
+    regions = [
+        "გურია", "იმერეთი", "კახეთი", 
+        "მცხეთა-მთიანეთი", "რაჭა-ლეჩხუმისა და ქვემო სვანეთი", 
+        "სამეგრელო-ზემო სვანეთი", "სამცხე-ჯავახეთი",
+        "ქვემო ქართლი", "შიდა ქართლი", "აჭარა", "თბილისი"
+    ]
     for region in regions:
         region_ = Region(region_name=region, country_id=1)
         region_.create()
     region_.save()
 
     # populating city table
-    cities = ["ქუთაისი", "თბილისი", "ზუგდიდი", "ბათუმი", "გორი"]
+    cities = [
+        {"name": "ქუთაისი", "region_id": 2},
+        {"name": "თბილისი", "region_id": 11},
+        {"name": "ზუგდიდი", "region_id": 6},
+        {"name": "ბათუმი", "region_id": 10},
+        {"name": "გორი", "region_id": 9},
+    ]
     for city in cities:
-        city_ = City(city_name=city, region_id=1)
+        city_ = City(
+            city_name=city["name"], 
+            region_id=city["region_id"]
+        )
         city_.create()
     city_.save()
 
     # populating university table
-    unisversities = ["ილიაუნი", "თსუ", "თსსუ", "გტუ", "სამხატვრო"]
-    for university in unisversities:
-        university_ = University(university_name=university, city_id=1)
+    universities = [
+        {"name": "ილიაუნი", "city_id": 2},
+        {"name": "თსუ", "city_id": 2},
+        {"name": "თსსუ", "city_id": 2},
+        {"name": "გტუ", "city_id": 2},
+        {"name": "სამხატვრო", "city_id": 2},
+    ]
+    for university in universities:
+        university_ = University(
+            university_name=university["name"], 
+            city_id=university["city_id"]
+        )
         university_.create()
     university_.save()
 

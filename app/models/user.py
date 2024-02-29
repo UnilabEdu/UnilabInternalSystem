@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from app.models.questions import QuestionOption
 
+
 class User(BaseModel):
     __tablename__ = "users"
 
@@ -79,17 +80,32 @@ class User(BaseModel):
             "personal_id": self.personal_id,
             "date": str(self.date),
             "gender": self.gender,
-            "country_id": self.country_id,
-            "region_id": self.region_id,
-            "city_id": self.city_id,
+            "country": {
+                "id": self.country_id,
+                "name": Country.query.get(self.country_id).country_name
+            },
+            "region": {
+                "id": self.region_id,
+                "name": Region.query.get(self.region_id).region_name
+            },
+            "city": {
+                "id": self.city_id,
+                "name": City.query.get(self.city_id).city_name
+            },
+            "university": {
+                "id": self.university_id,
+                "name": University.query.get(self.university_id).university_name
+            },
             "address": self.address,
-            "role": [role.name for role in self.role],
+            "role": [
+                {"id": role.id, "name": role.name}
+                for role in self.role
+            ],
             "school": self.school,
             "grade": self.grade,
             "parent_name": self.parent_name,
             "parent_lastname": self.parent_lastname,
             "parent_number": self.parent_number,
-            "university_id": self.university_id,
             "faculty": self.faculty,
             "program": self.program,
             "semester": self.semester,
@@ -137,6 +153,40 @@ class Country(BaseModel):
     country_name = db.Column(db.String)
 
     user = db.relationship("User", backref="country")
+
+
+    @classmethod
+    def get_locations(cls):
+        data = [
+            {
+                "id": country.id,
+                "name": country.country_name,
+                "regions": [
+                    {
+                        "id": region.id,
+                        "name": region.region_name,
+                        "cities": [
+                            {
+                                "id": city.id,
+                                "name": city.city_name,
+                                "universities": [
+                                    {
+                                        "id": university.id,
+                                        "name": university.university_name
+                                    }
+                                    for university in University.query.filter_by(city_id=city.id).all()
+                                ]
+                            }
+                            for city in City.query.filter_by(region_id=region.id).all()
+                        ]
+                    }
+                    for region in Region.query.filter_by(country_id=country.id).all()
+                ]
+            }
+            for country in cls.query.all()
+        ]
+        
+        return data
 
 
 class Region(BaseModel):

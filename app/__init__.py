@@ -48,7 +48,7 @@ def register_extensions(app):
         user_email = jwt_data["sub"]
         
         return User.query.filter(User.email == user_email).first()
-    
+
 
 def register_commands(app):
     for command in COMMANDS:

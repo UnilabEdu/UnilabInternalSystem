@@ -36,8 +36,6 @@ class UserProfileApi(Resource):
 
     parser.add_argument("about_me", required=True, type=str)
 
-    parser.add_argument("terms", required=False, type=str, default=True)
-
     @jwt_required()
     def get(self):
         if current_user:

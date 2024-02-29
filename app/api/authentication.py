@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse, inputs
-from app.models.user import User, Country, Region, City, University
-from app.models.roles import UserRole
+from app.models.user import User, Country
+from app.models.roles import UserRole, Role
 from app.api.validators.authentication import check_validators
 from app.api.validators.mail import create_key, send_email
 from flask import render_template
@@ -96,19 +96,12 @@ class RegistrationApi(Resource):
 
     def get(self):
 
-        country = [{object.id: object.country_name}
-                   for object in Country.query.all()]
-        region = [{object.id: object.region_name}
-                  for object in Region.query.all()]
-        city = [{object.id: object.city_name} for object in City.query.all()]
-        university = [{object.id: object.university_name}
-                      for object in University.query.all()]
+        locations = Country.get_locations()
+        roles = Role.get_roles()
 
         data = {
-            "countries": country,
-            "regions": region,
-            "cities": city,
-            "universities": university
+            "locations": locations,
+            "roles": roles
         }
 
         return data, 200

@@ -1,3 +1,4 @@
+from flask import Flask
 from flask_restful import Api
 from app.api.authentication import RegistrationApi, AuthorizationApi, AccessTokenRefreshApi
 from app.api.mailconfirmation import SendConfirmEmailApi, ReceiveConfirmEmailApi
@@ -12,7 +13,7 @@ from app.api.projects import ProjectApi
 from app.api.portfolio import PortfolioApi
 
 
-api = Api()
+api = Api(errors=Flask.errorhandler)
 api.add_resource(RegistrationApi, "/api/registration")
 api.add_resource(AuthorizationApi, "/api/authorization")
 api.add_resource(AccessTokenRefreshApi, "/api/refresh_access_token")

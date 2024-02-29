@@ -8,7 +8,7 @@ from datetime import datetime
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, current_user
 
-from app.models import Project, ProjectUser
+from app.models import Project, ProjectUser, Announcement, AnnouncementUser
 from app.config import Config
 
 
@@ -32,13 +32,17 @@ class ProjectApi(Resource):
         if len(images) == len(request_parser["images"]):
             date = datetime.now()
 
+            announcement = AnnouncementUser.query.join(Announcement, Announcement.id == AnnouncementUser.announcement_id).filter(
+                AnnouncementUser.user_id == current_user.id, AnnouncementUser.passed == True, Announcement.end_date > date
+            ).first()
+
             project = Project(
                 name=request_parser["name"],
                 description=request_parser["description"],
                 url=request_parser["url"],
                 date=date,
                 type=request_parser["type"],
-                # announcement_id=1
+                announcement_id=announcement.announcement_id
             )   
             project.create()
             project.save()
