@@ -995,6 +995,79 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Subjects",
+			"item": [
+				{
+					"name": "Create Subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNzU4NjE0NSwianRpIjoiOGNjYWM4YmEtNWIxNy00ZTlmLWE5NWQtYWU4MzIyZTQ3ZTBjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Imdpb3JnaS5rb21hc3VyaWR6ZUBnbWFpbC5jb20iLCJuYmYiOjE3MDc1ODYxNDUsImV4cCI6MTcwNzU4OTc0NX0.Lq2nFY4RxSAMqEIryLxXLZnWuR1jeyGTruqV98UJ3Ck",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Python",
+									"type": "text"
+								},
+								{
+									"key": "lecturers_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "lecturers_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "course_syllabus",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "internship_syllabus",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "tlt_syllabus",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "school_syllabus",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/subject",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subject"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

@@ -19,7 +19,6 @@ class Announcement(BaseModel):
     certificates = db.relationship("Certificate", back_populates="announcement")
     lecturers = db.relationship("AnnouncementLecturer", backref="announcement_lecturers")
 
-
     @classmethod
     def get_all_announcements(cls):
         announcements = cls.query.all()
@@ -29,13 +28,21 @@ class Announcement(BaseModel):
                 "id": announcement.id,
                 "name": announcement.name,
                 "subject_id": announcement.subject_id,
+                "subject_name": "",  # ?
                 "activity_type_id": announcement.activity_type_id,
+                "activity_type_name": "",  # ?
                 "registration_start": str(announcement.registration_start),
                 "registration_end": str(announcement.registration_end),
                 "start_date": str(announcement.start_date),
                 "end_date": str(announcement.end_date),
                 "description": announcement.description,
-                "lecturer_ids": [lecturer.id for lecturer in announcement.lecturers],
+                "lecturers": [
+                    {
+                        "id": lecturer.id,
+                        "name": lecturer.name
+                    }
+                    for lecturer in announcement.lecturers
+                ],
                 "projects": [
                     {
                         "id": project.id,
