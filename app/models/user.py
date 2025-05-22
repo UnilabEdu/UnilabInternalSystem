@@ -35,6 +35,10 @@ class User(BaseModel):
     certificates = db.relationship("Certificate", back_populates="user")
     subjects = db.relationship("Subject", secondary="subject_lecturer", back_populates="lecturers")
 
+    # status #
+    status = db.Column(db.String, nullable=True)
+    terms_accepted = db.Column(db.Boolean, default=True)
+
     # Pupil #
     school_id = db.Column(db.Integer, db.ForeignKey("schools.id"), nullable=True)
     grade = db.Column(db.String, nullable=True)
@@ -48,6 +52,10 @@ class User(BaseModel):
     program = db.Column(db.String, nullable=True)
     semester = db.Column(db.String, nullable=True)
     degree_level = db.Column(db.String, nullable=True)
+
+    # graduated #
+    # it is same as in student, but we add completion time
+    completion_date = db.Column(db.DateTime, nullable=True)
 
     def _get_password(self):
         return self._password

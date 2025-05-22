@@ -18,17 +18,24 @@ registration_model = auth_ns.model('Registration', {
     'region_id': fields.Integer(required=True, description='Region ID', example=11),
     'city_id': fields.Integer(required=True, description='City ID', example=2),
     'address': fields.String(required=True, description='Address', example='მისამართი..'),
+    'status': fields.String(required=True, description='Status', example='student', enum=['pupil', 'student', 'graduate', 'other']),
+    'terms_agreed': fields.Boolean(required=True, description='Agree to terms and conditions', example=True),
     'role_id': fields.Integer(required=True, description='Role ID', example=2),
-    'school_id': fields.Integer(required=True, description='School ID',example=1),
-    'grade': fields.String(required=True, description='Grade', example="10"),
-    'parent_name': fields.String(required=True, description='Parent\'s name', example="დავითი"),
-    'parent_lastname': fields.String(required=True, description='Parent\'s last name', example = "გვარაძე"),
-    'parent_number': fields.String(required=True, description='Parent\'s phone number', example = "599243115"),
-    'university_id': fields.Integer(required=True, description='University ID', example=1),
-    'faculty': fields.String(required=True, description='Faculty', example="კომპიუტერული მეცნიერება"),
-    'program': fields.String(required=True, description='Program', example="Ml modeling"),
-    'semester': fields.String(required=True, description='Semester', example="ზაფხული 2024"),
-    'degree_level': fields.String(required=True, description='Degree level', example="მაგისტრი"),
+
+    # Pupil fields
+    'school_id': fields.Integer(required=False, example=1),
+    'grade': fields.String(required=False, example="10"),
+    'parent_name': fields.String(required=False, example="დავითი"),
+    'parent_lastname': fields.String(required=False, example="გვარაძე"),
+    'parent_number': fields.String(required=False, example="599243115"),
+
+    # Student/Graduate fields
+    'university_id': fields.Integer(required=False, example=1),
+    'faculty': fields.String(required=False, example="კომპიუტერული მეცნიერება"),
+    'program': fields.String(required=False, example="Ml modeling"),
+    'semester': fields.String(required=False, example="ზაფხული 2024"),
+    'degree_level': fields.String(required=False, example="მაგისტრი"),
+    'completion_date': fields.DateTime(required=False, dt_format='iso8601', example='2025-07-01T00:00:00.000Z'),
 })
 
 parser = reqparse.RequestParser()
@@ -44,20 +51,23 @@ parser.add_argument("password", required=True, type=str, help="Password example:
 parser.add_argument("region_id", required=True, type=int, help="Region ID example: 11 (cities and regions should be a match)", location ='json')
 parser.add_argument("city_id", required=True, type=int, help="City ID example: 2 (cities and regions should be a match)", location ='json')
 parser.add_argument("address", required=True, type=str, help="Address example: 123 Main St", location ='json')
+parser.add_argument("status", required=True, type=str, help="User status. Determines which additional fields are required. Choose one of: 'pupil', 'student', 'graduate', 'other'.", choices=('pupil', 'student', 'graduate', 'other'), location='json')
+parser.add_argument("terms_agreed", required=True, type=inputs.boolean, help="You must agree to the terms and conditions by checking the box", location='json')
 
 parser.add_argument("role_id", required=True, type=int, help="Role ID example: 2  (1- is for admin)", location ='json')
 
-parser.add_argument("school_id", required=True, nullable=True, type=int, help="School example: High School", location ='json')
-parser.add_argument("grade", required=True, nullable=True, type=str, help="Grade example: 10th Grade ", location ='json')
-parser.add_argument("parent_name", required=True, nullable=True, type=str, help="Parent's name example: John ", location ='json')
-parser.add_argument("parent_lastname", required=True, nullable=True, type=str, help="Parent's last name example: Doe ", location ='json')
-parser.add_argument("parent_number", required=True, nullable=True, type=str, help="Parent's phone number example: 123456789 ", location ='json')
+parser.add_argument("school_id", required=False, nullable=True, type=int, help="School example: High School", location ='json')
+parser.add_argument("grade", required=False, nullable=True, type=str, help="Grade example: 10th Grade ", location ='json')
+parser.add_argument("parent_name", required=False, nullable=True, type=str, help="Parent's name example: John ", location ='json')
+parser.add_argument("parent_lastname", required=False, nullable=True, type=str, help="Parent's last name example: Doe ", location ='json')
+parser.add_argument("parent_number", required=False, nullable=True, type=str, help="Parent's phone number example: 123456789 ", location ='json')
 
-parser.add_argument("university_id", required=True, nullable=True, type=int, help="University ID example: 1", location ='json')
-parser.add_argument("faculty", required=True, nullable=True, type=str, help="Faculty example: Engineering ", location ='json')
-parser.add_argument("program", required=True, nullable=True, type=str, help="Program example: Computer Science", location ='json')
-parser.add_argument("semester", required=True, nullable=True, type=str, help="Semester example: 1st Semester ", location ='json')
-parser.add_argument("degree_level", required=True, nullable=True, type=str, help="Degree level example: Bachelor", location ='json')
+parser.add_argument("university_id", required=False, nullable=True, type=int, help="University ID example: 1", location ='json')
+parser.add_argument("faculty", required=False, nullable=True, type=str, help="Faculty example: Engineering ", location ='json')
+parser.add_argument("program", required=False, nullable=True, type=str, help="Program example: Computer Science", location ='json')
+parser.add_argument("semester", required=False, nullable=True, type=str, help="Semester example: 1st Semester ", location ='json')
+parser.add_argument("degree_level", required=False, nullable=True, type=str, help="Degree level example: Bachelor", location ='json')
+parser.add_argument("completion_date", required=False, type=inputs.datetime_from_iso8601, help="Completion date example: 2024-06-25T15:22:57.338Z (visible only for Graduates)", location='json')
 
 @auth_ns.route('/register')
 @auth_ns.doc(responses={200: 'OK', 400: 'Invalid Argument'})
@@ -66,6 +76,23 @@ class RegistrationApi(Resource):
     @auth_ns.doc(parser=parser)
     def post(self):
         args = parser.parse_args()
+
+        if not args["terms_agreed"]:
+            return "უნდა დაეთანხმოთ წესებს და პირობებს", 400
+
+        # Validate conditional fields
+        status = args["status"]
+        if status == "pupil":
+            required_fields = ["school_id", "grade", "parent_name", "parent_lastname", "parent_number"]
+        elif status == "student":
+            required_fields = ["university_id", "faculty", "program", "semester", "degree_level"]
+        else:
+            required_fields = []
+
+        for field in required_fields:
+            if not args.get(field):
+                return f"{field} ველი სავალდებულოა ამ სტატუსისთვის", 400
+
         validation = check_validators(args)
         if validation:
             return validation
@@ -91,12 +118,14 @@ class RegistrationApi(Resource):
             faculty=args["faculty"],
             program=args["program"],
             semester=args["semester"],
-            degree_level=args["degree_level"]
+            degree_level=args["degree_level"],
+            completion_date=args["completion_date"]
         )
 
         new_user.create()
         new_user.save()
 
+        # Default role for self-registration
         new_user_role = UserRole(user_id=new_user.id, role_id=args["role_id"])
         new_user_role.create()
         new_user_role.save()
@@ -106,3 +135,32 @@ class RegistrationApi(Resource):
         send_email(subject="Confirm your account", html=html, recipients=args["email"])
 
         return f"/confirm_account/{key}", 200 # TODO: Remove token once we move to production
+
+
+# {
+#   "firstname": "გიორგი",
+#   "surname": "გვარაძე",
+#   "email": "giorgi.gvaradze@gmail.com",
+#   "number": "598123456",
+#   "personal_id": "01234567891",
+#   "date": "2024-06-25T15:22:57.338Z",
+#   "gender": "მამრობითი",
+#   "password": "password",
+#   "region_id": 11,
+#   "city_id": 2,
+#   "address": "მისამართი..",
+#   "status": "student",
+#   "terms_agreed": true,
+#   "role_id": 2,
+#   "school_id": 1,
+#   "grade": "10",
+#   "parent_name": "დავითი",
+#   "parent_lastname": "გვარაძე",
+#   "parent_number": "599243115",
+#   "university_id": 1,
+#   "faculty": "კომპიუტერული მეცნიერება",
+#   "program": "Ml modeling",
+#   "semester": "ზაფხული 2024",
+#   "degree_level": "მაგისტრი",
+#   "completion_date": "2025-07-01T00:00:00.000Z"
+# }
