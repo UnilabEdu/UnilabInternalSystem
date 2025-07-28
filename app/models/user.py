@@ -28,6 +28,9 @@ class User(BaseModel):
 
     about_me = db.Column(db.String, nullable=True)
 
+    # profile image #
+    profile_image = db.Column(db.String, nullable=True)
+
     role = db.relationship("Role", secondary="user_roles", backref="roles")
     announcements = db.relationship("Announcement", secondary="announcement_user", backref="announcements")
     question = db.relationship("Question", backref="user")
