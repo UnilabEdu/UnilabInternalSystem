@@ -15,6 +15,9 @@ class Announcement(BaseModel):
     end_date = db.Column(db.DateTime)
     description = db.Column(db.Text)
 
+    # syllabus #
+    syllabus_pdf = db.Column(db.String, nullable=True)
+
     projects = db.relationship("Project", back_populates="announcement")
     certificates = db.relationship("Certificate", back_populates="announcement")
     lecturers = db.relationship("AnnouncementLecturer", backref="announcement_lecturers")

@@ -143,3 +143,35 @@ class AnnouncementApi(Resource):
         announcement.delete()
         announcement.save()
         return 200
+
+
+# announcement details API
+@announcement_ns.route('/announcement/<int:id>/details')
+@announcement_ns.doc(responses={200: 'OK', 404: 'Not Found'})
+class AnnouncementDetailsApi(Resource):
+    @jwt_required()
+    @announcement_ns.doc(security='JsonWebToken')
+    def get(self, id):
+
+        announcement = Announcement.query.get(id)
+        if not announcement:
+            return {"message": "კურსი ვერ მოიძებნა"}, 404
+
+        lecturer_data = []
+        for lecturer_list in announcement.lecturers:
+            lecturer = User.query.get(lecturer_list.user_id)
+            if lecturer:
+                lecturer_data.append({
+                    "id": lecturer.id,
+                    "full_name": f"{lecturer.name} {lecturer.lastname}",
+                    "description": lecturer.about_me,
+                    "image": lecturer.profile_image
+                })
+
+        return {
+            "id": announcement.id,
+            "name": announcement.name,
+            "description": announcement.description,
+            "lecturers": lecturer_data,
+            "syllabus_pdf": announcement.syllabus_pdf
+        }, 200
